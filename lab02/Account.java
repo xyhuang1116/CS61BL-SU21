@@ -1,14 +1,24 @@
 /**
- * This class represents a bank account whose current balance is a nonnegative
+ * This class represents a bank account whose current balance is a non-negative
  * amount in US dollars.
  */
 public class Account {
 
     private int balance;
+    private Account parentAccount;
 
     /** Initialize an account with the given balance. */
     public Account(int balance) {
+
         this.balance = balance;
+        this.parentAccount = null;
+    }
+
+    /** Initialize an account with the given balance and parent account. */
+    public Account(int balance, Account parentAccount) {
+
+        this.balance = balance;
+        this.parentAccount = parentAccount;
     }
 
     /** Returns the balance for the current account. */
@@ -30,15 +40,24 @@ public class Account {
      * would leave a negative balance, print an error message and leave the
      * balance unchanged.
      */
-    public void withdraw(int amount) {
+    public boolean withdraw(int amount) {
         // TODO
         if (amount < 0) {
             System.out.println("Cannot withdraw negative amount.");
         } else if (balance < amount) {
-            System.out.println("Insufficient funds");
+              if (parentAccount != null) {
+                  if (parentAccount.withdraw(amount - balance)) {
+                      withdraw(balance);
+                      return true;
+                  }
+              } else {
+                    System.out.println("Insufficient funds");
+              }
         } else {
             balance -= amount;
+            return true;
         }
+        return false;
     }
 
     /**
@@ -47,5 +66,7 @@ public class Account {
      */
     public void merge(Account other) {
         // TODO
+        this.deposit(other.getBalance());
+        other.withdraw(other.getBalance());
     }
 }
