@@ -9,6 +9,11 @@ public class ArrayOperations {
             return;
         }
         // TODO: YOUR CODE HERE
+        while (pos < values.length - 1) {
+            values[pos] = values[pos+1];
+            pos++;
+        }
+        values[pos] = 0;
     }
 
     /**
@@ -21,6 +26,10 @@ public class ArrayOperations {
             return;
         }
         // TODO: YOUR CODE HERE
+        for (int i = values.length - 1; i > pos; i--) {
+            values[i] = values[i-1];
+        }
+        values[pos] = newInt;
     }
 
     /** 
@@ -29,7 +38,11 @@ public class ArrayOperations {
      */
     public static int[] catenate(int[] A, int[] B) {
         // TODO: YOUR CODE HERE
-        return null;
+        int[] array = new int[A.length+B.length];
+        for (int i = 0; i < A.length; i++) { array[i] = A[i]; }
+        for (int i = A.length; i < array.length; i++) { array[i] = B[i-A.length]; }
+
+        return array;
     }
 
     /** 
@@ -38,7 +51,27 @@ public class ArrayOperations {
      */
     public static int[][] naturalRuns(int[] A) {
         // TODO: Your CODE HERE
-        return null;
+        int[] breakPos = new int[A.length];
+        int[][] multiArray;
+        int breakPosLen = 0;
+        for (int i = 0; i < A.length - 1; i++) {
+            if (A[i] >= A[i+1]) {
+                breakPos[breakPosLen] = i;
+                breakPosLen += 1;
+            }
+        }
+        multiArray = new int[breakPosLen+1][];
+        for (int i = 0; i <= breakPosLen; i++) {
+            if (i == 0) {
+                multiArray[i] = subarray(A, 0, breakPos[i]+1);
+            } else if (i == breakPosLen) {
+                multiArray[i] = subarray(A, breakPos[i-1]+1, A.length-1-breakPos[i-1]);
+            } else {
+                multiArray[i] = subarray(A, breakPos[i-1]+1, breakPos[i]-breakPos[i-1]);
+            }
+        }
+
+        return multiArray;
     }
 
     /*
