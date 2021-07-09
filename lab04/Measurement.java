@@ -57,7 +57,7 @@ public class Measurement {
      * that m2 will always be smaller than the current measurement.
      */
     public Measurement minus(Measurement m2) {
-        if (getInches()>=m2.getInches()) {
+        if (getInches() >= m2.getInches()) {
             return new Measurement(getFeet()- m2.getFeet(), getInches()-m2.getInches());
         } else {
             return new Measurement(getFeet()- m2.getFeet()-1, 12+getInches()-m2.getInches());
