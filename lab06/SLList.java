@@ -128,7 +128,6 @@ public class SLList {
 
     /** Adds x to the list at the specified index. */
     public void add(int index, int x) {
-        // TODO
         if (index == 0){
             addFirst(x);
         }else{
@@ -146,16 +145,30 @@ public class SLList {
 
     /** Destructively reverses this list. */
     public void reverse() {
-        // TODO
         if (size() <= 1) {
             return;
         }else{
-            reverseHelper(sentinel.next);
+            IntListNode temp = reverseHelper(sentinel.next);
+            temp.next = sentinel;
         }
     }
 
     public IntListNode reverseHelper(IntListNode L){
-        IntListNode temp;
+        if (L.next.equals(sentinel)){
+            sentinel.next = L;
+            return L;
+        }else{
+            IntListNode temp = reverseHelper(L.next);
+            temp.next = L;
+            //L.next = sentinel;
+            return L;
+        }
+       /* else{
+            IntListNode temp = ;
+
+            return temp;
+        }*/
+
 
     }
 }
