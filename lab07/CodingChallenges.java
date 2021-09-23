@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.Arrays;
 
 public class CodingChallenges {
 
@@ -10,7 +13,19 @@ public class CodingChallenges {
      */
     public static int missingNumber(int[] values) {
         // TODO
+        /** Ex:
+        List<Integer> list = Arrays.stream(values).boxed().toList();
+        for(int i = 0; i < values.length; i++){
+            if(!list.contains(i)){
+                return i;
+            }
+        }
         return -1;
+        */
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i <= values.length; i++){list.add(i);}
+        for(int j : values){list.remove((Integer) j);}
+        return list.get(0);
     }
 
     /**
