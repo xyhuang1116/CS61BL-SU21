@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
-import java.util.Arrays;
+import java.util.*;
 
 public class CodingChallenges {
 
@@ -12,7 +7,6 @@ public class CodingChallenges {
      * values from 0 to N except for one missing number.
      */
     public static int missingNumber(int[] values) {
-        // TODO
         /** Ex:
         List<Integer> list = Arrays.stream(values).boxed().toList();
         for(int i = 0; i < values.length; i++){
@@ -33,7 +27,10 @@ public class CodingChallenges {
      * Assume all values in the array are unique.
      */
     public static boolean sumTo(int[] values, int n) {
-        // TODO
+        Set<Integer> set = new HashSet<>();
+        for(int i : values){set.add(i);}
+        for(int j : values){
+            if(set.contains(n-j)&& n != 2*j){return true;}}
         return false;
     }
 
@@ -42,7 +39,27 @@ public class CodingChallenges {
      * permutation of s2 if it has the same number of each character as s2.
      */
     public static boolean isPermutation(String s1, String s2) {
-        // TODO
+        Map<Character,Integer> map = new HashMap<>();
+        // convert s1 to map
+        for(char c: s1.toCharArray()){
+            if(!map.containsKey(c)){
+                map.put(c,1);
+            }else{
+                Integer value = map.get(c);
+                map.replace(c,value,value+1);
+            }
+        }
+        for(char ch: s2.toCharArray()){
+            if(!map.containsKey(ch)){
+                return false;
+            }else{
+                Integer value = map.get(ch);
+                if(value == 1){map.remove(ch);}else{map.replace(ch,value,value-1);}
+            }
+        }
+        if(map.isEmpty()){
+            return true;
+        }
         return false;
     }
 }
