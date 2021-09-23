@@ -13,7 +13,7 @@ public class GregorianDate extends Date {
     @Override
     public Date nextDate() {
         int newDay, newMonth, newYear;
-        if (dayOfMonth == MONTH_LENGTHS[month-1]) {
+        if (dayOfMonth == MONTH_LENGTHS[month - 1]) {
             newDay = 1;
             newMonth = month + 1;
         } else {
