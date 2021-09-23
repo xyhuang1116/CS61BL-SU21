@@ -223,7 +223,7 @@ public class IntList {
      * @param B list to be on the back of the new list.
      * @return new list with A followed by B.
      */
-     public static IntList catenate(IntList A, IntList B) {
+     public static IntList catenate1(IntList A, IntList B) {
         //TODO: YOUR CODE HERE
          IntList C = new IntList(A.item);
          IntList newList = C;
@@ -245,6 +245,36 @@ public class IntList {
          return newList;
      }
 
+
+    public static IntList catenate(IntList A, IntList B) {
+        //TODO: YOUR CODE HERE
+        IntList C = new IntList(A.item);
+        IntList newList = C;
+
+        while (A.next != null) {
+            A = A.next;
+            C.next = new IntList(A.item);
+            C = C.next;
+        }
+
+        C.next = new IntList(B.item);
+        C = C.next;
+
+        while (B.next != null) {
+            B = B.next;
+            C.next = new IntList(B.item);
+            C = C.next;
+        }
+        return newList;
+    }
+
+    public static IntList catenateeHelper(IntList LastItem, IntList NewIist){
+         while(NewIist != null){
+             LastItem.add(NewIist.item);
+             LastItem = LastItem.next;
+         }
+
+    }
 
 
 }
