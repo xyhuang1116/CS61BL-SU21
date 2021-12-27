@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 public class HashMapTest {
 
+
     @Test
     public void testConstructor() {
         // assert constructors are initialized, seem to work correctly, and
@@ -161,7 +162,6 @@ public class HashMapTest {
         assertTrue(studentIDs.containsKey("jay"));
 
         // ensure that containsKey does not always return true
-        assertFalse(studentIDs.containsKey("jay"));
         assertFalse(studentIDs.containsKey("travis"));
         assertFalse(studentIDs.containsKey("ryan"));
         studentIDs.put("ryan", 162);
@@ -181,6 +181,7 @@ public class HashMapTest {
         for (String name : studentIDs) {
             output.add(name);
         }
+
         assertEquals(expected, output);
     }
 
