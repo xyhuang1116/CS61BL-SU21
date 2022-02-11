@@ -53,7 +53,6 @@ public class HashMap<K, V> implements Map61BL<K, V> {
         size = 0;
         sNM = new LinkedList[capacity];
     }
-    
 
     /* Returns true if the map contains the KEY. */
     public boolean containsKey(K key) {

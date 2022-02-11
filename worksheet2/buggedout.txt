@@ -1,0 +1,12 @@
+
+o1 = arr-multiple(new int[0])
+assertEqual( o1, 0)
+
+o2 = arr-multiple(new int[]{1,2,0,3})
+assertEqual( o1, 6)
+
+o3 = arr-multiple(new int[]{1,2,3})
+assertEqual( o1, 6)
+
+o4 = arr-multiple(new int[5])
+assertEqual( o1, 0)
