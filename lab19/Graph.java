@@ -68,7 +68,7 @@ public class Graph implements Iterable<Integer> {
 
     /* Returns a list of all the vertices u such that the Edge (V, u)
        exists in the graph. */
-    public List<Integer> neighbors(int v) {
+    public List <Integer> neighbors(int v) {
         // TODO: YOUR CODE HERE
         ArrayList<Integer> neighbors = new ArrayList<Integer>();
         for (Edge e : adjLists[v]) {
@@ -97,7 +97,7 @@ public class Graph implements Iterable<Integer> {
         for(LinkedList<Edge> adj: adjLists){
             for (Edge e : adj) {
                if(e.to == v){
-                    count+=1;
+                    count += 1;
                }
             }
         }
@@ -244,23 +244,53 @@ public class Graph implements Iterable<Integer> {
 
     private class TopologicalIterator implements Iterator<Integer> {
 
-        private Stack<Integer> fringe;
-
         // TODO: Instance variables here!
+        private Stack<Integer> fringe;
+        private int[] currentInDegree;
 
-        TopologicalIterator() {
-
+        public TopologicalIterator() {
             // TODO: YOUR CODE HERE
+            fringe = new Stack<>();
+            currentInDegree = new int[vertexCount];
+            for (int i = 0; i < vertexCount; i++) {
+                int inDegreeI = inDegree(i);
+                currentInDegree[i] = inDegreeI;
+                if(inDegreeI == 0) {
+                    fringe.push(i);
+                    currentInDegree[i]--;
+                }
+            }
         }
 
         public boolean hasNext() {
             // TODO: YOUR CODE HERE
+            if (!fringe.isEmpty()) {
+                 int i = fringe.pop();
+                while (currentInDegree[i] != -1) {
+                    if (fringe.isEmpty()) {
+                        return false;
+                    }
+                    i = fringe.pop();
+                }
+                fringe.push(i);
+                return true;
+            }
             return false;
         }
 
         public Integer next() {
-            // TODO: YOUR CODE HERE
-            return 0;
+            int curr = fringe.pop();
+            ArrayList<Integer> lst = new ArrayList<>();
+            for (int i : neighbors(curr)) {
+                currentInDegree[i]--;
+            }
+            for (int i = 0; i < vertexCount; i++) {
+                if (currentInDegree[i] == 0) {
+                    fringe.push(i);
+                    currentInDegree[i]--;
+                }
+            }
+            return curr;
         }
 
         public void remove() {
@@ -360,21 +390,21 @@ public class Graph implements Iterable<Integer> {
     }
 
     public static void main(String[] args) {
-        Graph g1 = new Graph(5);
+/*         Graph g1 = new Graph(5);
         g1.generateG1();
-        //g1.printDFS(0);
-        //g1.printDFS(2);
-        //g1.printDFS(3);
-        //g1.printDFS(4);
+        g1.printDFS(0);
+        g1.printDFS(2);
+        g1.printDFS(3);
+        g1.printDFS(4); */
 
-        g1.printPath(0, 3);
+        /* g1.printPath(0, 3);
         g1.printPath(0, 4);
         g1.printPath(1, 3);
         g1.printPath(1, 4);
         g1.printPath(4, 0);
-
+ */
         Graph g2 = new Graph(5);
-        //g2.generateG2();
-        //g2.printTopologicalSort();
+        g2.generateG2();
+        g2.printTopologicalSort();
     }
 }
