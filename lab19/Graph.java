@@ -265,8 +265,8 @@ public class Graph implements Iterable<Integer> {
         public boolean hasNext() {
             // TODO: YOUR CODE HERE
             if (!fringe.isEmpty()) {
-                 int i = fringe.pop();
-                while (currentInDegree[i] != -1) {
+                int i = fringe.pop();
+                while (currentInDegree[i] == -1) {
                     if (fringe.isEmpty()) {
                         return false;
                     }
